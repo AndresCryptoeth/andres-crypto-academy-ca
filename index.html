@@ -1,171 +1,951 @@
+cat > index.html << 'ENDOFFILE'
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrés Crypto Academy</title>
+    <title>Andrés Crypto Academy | Domina el Lenguaje del Dinero Digital</title>
+    <meta name="description" content="Formación en vivo para hispanos en USA. Aprende blockchain, evita estafas y construye activos digitales con el RPB System.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'crypto-dark': '#0a0a0f',
+                        'crypto-navy': '#0f172a',
+                        'crypto-gold': '#f59e0b',
+                        'crypto-accent': '#3b82f6',
+                        'crypto-success': '#10b981',
+                        'crypto-purple': '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
         body { background-color: #0a0a0f; color: #ffffff; }
-        .glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .gradient-text { background: linear-gradient(135deg, #f59e0b 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .social-icon { transition: all 0.3s ease; }
-        .social-icon:hover { transform: translateY(-3px); filter: brightness(1.2); }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 40%);
+        }
+        .grid-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .scam-alert {
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border-left: 4px solid #ef4444;
+        }
+        .live-badge { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .quote-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .pricing-card-featured {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border: 2px solid #f59e0b;
+            transform: scale(1.05);
+        }
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.2);
+        }
+        .logo-a {
+            background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        .scam-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
     </style>
 </head>
-<body class="font-sans antialiased">
-    <nav class="fixed w-full z-50 top-0 bg-black/80 backdrop-blur-md border-b border-white/10">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-blue-500 flex items-center justify-center">
-                    <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="absolute inset-0 bg-crypto-dark/80 backdrop-blur-md border-b border-white/10"></div>
+        <div class="container mx-auto px-6 py-4 relative">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="logo-a w-10 h-10 text-xl">
+                        A
+                    </div>
+                    <div>
+                        <h1 class="font-display font-bold text-xl text-white">Andrés Crypto</h1>
+                        <p class="text-xs text-gray-400">Academy</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="font-bold text-xl">Andrés Crypto</h1>
-                    <p class="text-xs text-gray-400">Academy</p>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#problema" class="text-gray-300 hover:text-crypto-gold transition-colors text-sm font-medium">El Problema</a>
+                    <a href="#instructor" class="text-gray-300 hover:text-crypto-gold transition-colors text-sm font-medium">Instructor</a>
+                    <a href="#programa" class="text-gray-300 hover:text-crypto-gold transition-colors text-sm font-medium">Programa</a>
+                    <a href="#testimonios" class="text-gray-300 hover:text-crypto-gold transition-colors text-sm font-medium">Testimonios</a>
+                    <a href="#precios" class="text-gray-300 hover:text-crypto-gold transition-colors text-sm font-medium">Inversión</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="hidden md:flex items-center gap-3 mr-4">
+                        <a href="https://www.instagram.com/andrescrypto.eth/" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-pink-600/20 hover:border-pink-500/50 border border-transparent">
+                            <i data-lucide="instagram" class="w-4 h-4 text-gray-300 hover:text-pink-400"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-cyan-600/20 hover:border-cyan-500/50 border border-transparent">
+                            <svg class="w-4 h-4 text-gray-300 hover:text-cyan-400" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                            </svg>
+                        </a>
+                        <a href="https://x.com/Andrescryptoeth" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-gray-600/20 hover:border-gray-500/50 border border-transparent">
+                            <svg class="w-4 h-4 text-gray-300 hover:text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <a href="#precios" class="bg-crypto-gold hover:bg-amber-500 text-black font-bold px-6 py-2.5 rounded-full transition-all transform hover:scale-105 flex items-center gap-2">
+                        <span>Quiero Empezar</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
                 </div>
             </div>
-            <div class="hidden md:flex items-center gap-6">
-                <a href="#programa" class="text-gray-300 hover:text-amber-500 text-sm">Programa</a>
-                <a href="#testimonios" class="text-gray-300 hover:text-amber-500 text-sm">Testimonios</a>
-                <a href="#precios" class="text-gray-300 hover:text-amber-500 text-sm">Precios</a>
-                <div class="flex items-center gap-2">
-                    <a href="https://www.instagram.com/andrescrypto.eth/" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
-                        <i data-lucide="instagram" class="w-4 h-4 text-gray-300"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
-                        <span class="text-xs">TT</span>
-                    </a>
-                    <a href="https://x.com/Andrescryptoeth" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
-                        <span class="text-xs">X</span>
-                    </a>
-                </div>
-                <a href="#precios" class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-6 py-2 rounded-full text-sm">Empezar</a>
+            
+            <div class="flex md:hidden items-center justify-center gap-4 mt-4 pt-4 border-t border-white/10">
+                <a href="https://www.instagram.com/andrescrypto.eth/" target="_blank" class="flex items-center gap-2 text-sm text-gray-400 hover:text-pink-400 transition-colors">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                    </svg>
+                    <span>TikTok</span>
+                </a>
+                <a href="https://x.com/Andrescryptoeth" target="_blank" class="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    <span>X</span>
+                </a>
             </div>
         </div>
     </nav>
 
-    <section class="pt-32 pb-20 px-6">
-        <div class="container mx-auto text-center max-w-4xl">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-amber-500 mb-6">
-                <span class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
-                <span>Inicio: 14-15 de Marzo 2025</span>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-32 md:pt-20 hero-gradient grid-pattern overflow-hidden">
+        <div class="absolute top-1/4 left-10 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="scam-alert rounded-lg p-4 flex items-center gap-3 max-w-xl">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-red-400 flex-shrink-0"></i>
+                        <p class="text-sm text-red-200">
+                            <strong>Alerta:</strong> +50,000 latinos en USA han perdido sus ahorros en estafas cripto este año. No seas el siguiente.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-crypto-gold">
+                            <span class="w-2 h-2 bg-crypto-gold rounded-full live-badge"></span>
+                            <span>Próxima cohorte: 14-15 de Marzo, 2025</span>
+                        </div>
+                        
+                        <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight">
+                            Domina el <span class="gradient-text">Lenguaje</span> del Dinero Digital
+                        </h1>
+                        
+                        <p class="text-xl text-gray-400 leading-relaxed max-w-lg">
+                            Formación intensiva de <strong>5 semanas en vivo</strong> para hispanos en USA. Deja de ser presa fácil, empieza a construir activos reales con el <strong>RPB System</strong>.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#precios" class="bg-crypto-gold hover:bg-amber-500 text-black font-bold px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25">
+                            <span>Asegurar mi Lugar</span>
+                            <i data-lucide="shield" class="w-5 h-5"></i>
+                        </a>
+                        
+                        <a href="#problema" class="border border-white/20 hover:border-crypto-gold text-white px-8 py-4 rounded-full text-lg transition-all flex items-center justify-center gap-2 group">
+                            <span>Ver el Problema</span>
+                            <i data-lucide="alert-circle" class="w-5 h-5 group-hover:text-crypto-gold transition-colors"></i>
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-4 text-sm text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-crypto-success"></i>
+                            <span>100% En Español</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-crypto-success"></i>
+                            <span>Clases Grabadas</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-crypto-success"></i>
+                            <span>Acceso a Skool Privado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="relative z-10 glass-card rounded-3xl p-8 border border-white/10 shadow-2xl">
+                        <div class="absolute -top-4 -right-4 bg-crypto-gold text-black font-bold px-4 py-2 rounded-full text-sm transform rotate-12">
+                            Solo 20 cupos
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                        <i data-lucide="video" class="w-6 h-6 text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">5 Fines de Semana</p>
+                                        <p class="text-sm text-gray-400">Sábados y Domingos</p>
+                                    </div>
+                                </div>
+                                <span class="text-crypto-success font-bold">En Vivo</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                                        <i data-lucide="bitcoin" class="w-6 h-6 text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">RPB System</p>
+                                        <p class="text-sm text-gray-400">Renta Permanente Bitcoin</p>
+                                    </div>
+                                </div>
+                                <span class="text-crypto-gold font-bold">Exclusivo</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                                        <i data-lucide="users" class="w-6 h-6 text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Comunidad Skool</p>
+                                        <p class="text-sm text-gray-400">Acceso inmediato</p>
+                                    </div>
+                                </div>
+                                <i data-lucide="lock" class="w-6 h-6 text-crypto-success"></i>
+                            </div>
+
+                            <div class="pt-4 border-t border-white/10">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="users" class="w-5 h-5 text-crypto-gold"></i>
+                                    <span class="text-sm font-medium">+1,200 estudiantes formados</span>
+                                </div>
+                                <div class="flex -space-x-3">
+                                    <div class="w-10 h-10 rounded-full border-2 border-crypto-dark bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-xs font-bold">JD</div>
+                                    <div class="w-10 h-10 rounded-full border-2 border-crypto-dark bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-xs font-bold">MR</div>
+                                    <div class="w-10 h-10 rounded-full border-2 border-crypto-dark bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-xs font-bold">AL</div>
+                                    <div class="w-10 h-10 rounded-full border-2 border-crypto-dark bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-xs font-bold">CV</div>
+                                    <div class="w-10 h-10 rounded-full border-2 border-crypto-dark bg-crypto-gold flex items-center justify-center text-black text-xs font-bold">
+                                        +1k
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-crypto-gold/20 rounded-full blur-2xl"></div>
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl"></div>
+                </div>
             </div>
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">Domina el <span class="gradient-text">Lenguaje</span> del Dinero Digital</h1>
-            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">Formación intensiva de 5 semanas en vivo para hispanos en USA. Evita estafas, construye activos reales con el RPB System.</p>
+        </div>
+    </section>
+
+    <!-- PROBLEMA: Sección de Estafas -->
+    <section id="problema" class="py-24 bg-red-950/20 border-y border-red-500/20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-bold mb-6">
+                    <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                    <span>LA CRISIS QUE NADIE VE</span>
+                </div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Más de <span class="text-red-500">50,000 latinos</span> en USA perdieron todo por estafas cripto
+                </h2>
+                <p class="text-xl text-gray-400">
+                    Proyectos que prometían el oro y el moro, desaparecieron con los ahorros de familias enteras. 
+                    Y lo peor: <strong>yo los predije en TikTok antes de que cayeran.</strong>
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="scam-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center">
+                        <i data-lucide="x-circle" class="w-8 h-8 text-red-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-red-400 mb-2">TPbit</h3>
+                    <p class="text-gray-400 text-sm mb-3">"Plataforma de trading automatizado"</p>
+                    <div class="text-3xl font-bold text-white mb-1">$12M+</div>
+                    <p class="text-xs text-gray-500">Estimado perdido por latinos</p>
+                    <div class="mt-4 inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs">
+                        Predicho en TikTok ✓
+                    </div>
+                </div>
+
+                <div class="scam-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center">
+                        <i data-lucide="x-circle" class="w-8 h-8 text-red-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-red-400 mb-2">Bitnest</h3>
+                    <p class="text-gray-400 text-sm mb-3">"Inversión en minería en la nube"</p>
+                    <div class="text-3xl font-bold text-white mb-1">$8M+</div>
+                    <p class="text-xs text-gray-500">Estimado perdido por latinos</p>
+                    <div class="mt-4 inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs">
+                        Predicho en TikTok ✓
+                    </div>
+                </div>
+
+                <div class="scam-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center">
+                        <i data-lucide="x-circle" class="w-8 h-8 text-red-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-red-400 mb-2">1TimeClub</h3>
+                    <p class="text-gray-400 text-sm mb-3">"Gana 300% en 30 días"</p>
+                    <div class="text-3xl font-bold text-white mb-1">$15M+</div>
+                    <p class="text-xs text-gray-500">Estimado perdido por latinos</p>
+                    <div class="mt-4 inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs">
+                        Predicho en TikTok ✓
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 border-l-4 border-red-500 max-w-3xl mx-auto">
+                <div class="flex items-start gap-4">
+                    <i data-lucide="quote" class="w-8 h-8 text-red-400 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <p class="text-lg text-gray-300 italic mb-4">
+                            "Vi cómo familias enteras perdieron sus ahorros de toda la vida. Gente que confió en 'amigos' que les prometieron hacerlos ricos. 
+                            En mi TikTok advertí sobre cada una de estas estafas <strong>meses antes de que explotaran</strong>. 
+                            La diferencia entre perderlo todo y proteger tu dinero es <span class="text-crypto-gold font-bold">educación</span>."
+                        </p>
+                        <p class="text-sm text-gray-500">— Andrés Crypto, 2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors">
+                    <span>Ver predicciones en TikTok</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUCTOR: Quién es Andrés -->
+    <section id="instructor" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-crypto-gold/10 border border-crypto-gold/30 text-crypto-gold text-sm font-bold mb-6">
+                        <span>TU INSTRUCTOR</span>
+                    </div>
+                    
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                        Conoce a <span class="gradient-text">Andrés Crypto</span>
+                    </h2>
+                    
+                    <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                        No soy un gurú de internet. Soy un <strong>consultor profesional en blockchain</strong> que ha estado en las trincheras del ecosistema crypto durante años, incluyendo una temporada trabajando para <strong>Cypher Capital</strong>, el fondo de inversión crypto más importante de los Emiratos Árabes Unidos.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-crypto-gold/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="building-2" class="w-6 h-6 text-crypto-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Cypher Capital (EAU)</h4>
+                                <p class="text-gray-400 text-sm">1 año trabajando para el fondo de inversión crypto más importante de Emiratos Árabes Unidos. Gestión de portafolios institucionales.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-crypto-gold/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="graduation-cap" class="w-6 h-6 text-crypto-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">+1,000 Alumnos Formados</h4>
+                                <p class="text-gray-400 text-sm">Más de mil personas han pasado por mis programas de educación. +200 asesorados personalizados en creación de portafolios crypto.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-crypto-gold/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-crypto-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Cazador de Estafas</h4>
+                                <p class="text-gray-400 text-sm">Predije públicamente (en TikTok e Instagram) el colapso de TPbit, Bitnest y 1TimeClub meses antes de que desaparecieran con millones.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-crypto-gold/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="globe" class="w-6 h-6 text-crypto-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Vista Global</h4>
+                                <p class="text-gray-400 text-sm">Viví 1 año en Dubai/EAU, el centro financiero crypto del mundo. Conexiones directas con exchanges, fondos y desarrolladores de primer nivel.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="logo-a w-16 h-16 text-2xl">A</div>
+                        <div>
+                            <p class="font-bold text-xl">Andrés Crypto</p>
+                            <p class="text-gray-400 text-sm">Consultor Blockchain & Fundador</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 relative">
+                    <div class="relative z-10 glass-card rounded-3xl p-8 border border-white/10">
+                        <div class="aspect-square rounded-2xl bg-gradient-to-br from-crypto-gold/20 to-crypto-accent/20 flex items-center justify-center mb-6">
+                            <div class="logo-a w-32 h-32 text-6xl">A</div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 rounded-xl bg-white/5">
+                                <div class="text-3xl font-bold text-crypto-gold">1,000+</div>
+                                <div class="text-sm text-gray-400">Alumnos</div>
+                            </div>
+                            <div class="text-center p-4 rounded-xl bg-white/5">
+                                <div class="text-3xl font-bold text-crypto-gold">200+</div>
+                                <div class="text-sm text-gray-400">Asesorados</div>
+                            </div>
+                            <div class="text-center p-4 rounded-xl bg-white/5">
+                                <div class="text-3xl font-bold text-crypto-gold">5+</div>
+                                <div class="text-sm text-gray-400">Años en Crypto</div>
+                            </div>
+                            <div class="text-center p-4 rounded-xl bg-white/5">
+                                <div class="text-3xl font-bold text-crypto-gold">3</div>
+                                <div class="text-sm text-gray-400">Estafas expuestas</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-crypto-gold/20 rounded-full blur-2xl"></div>
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section id="programa" class="py-24 relative bg-crypto-navy/30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Lo que vas a dominar en 5 semanas
+                </h2>
+                <p class="text-xl text-gray-400">
+                    No teoría vacía. Herramientas prácticas para proteger tu dinero y multiplicarlo en el ecosistema digital.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-6 hover:border-crypto-gold/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center mb-4">
+                        <i data-lucide="shield-alert" class="w-6 h-6 text-red-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Inmunidad contra Estafas</h3>
+                    <p class="text-gray-400 text-sm">Identifica Ponzi, tokens falsos y exploits antes de perder un centavo. Análisis de casos reales: TPbit, Bitnest, 1TimeClub.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 hover:border-crypto-gold/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
+                        <i data-lucide="wallet" class="w-6 h-6 text-blue-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Wallets y Seguridad</h3>
+                    <p class="text-gray-400 text-sm">Configuración bulletproof de wallets frías y calientes. Tus llaves, tu dinero. Protección contra hacks y phishing.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 hover:border-crypto-gold/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
+                        <i data-lucide="trending-up" class="w-6 h-6 text-green-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">RPB System</h3>
+                    <p class="text-gray-400 text-sm">Renta Permanente en Bitcoin: ahorra mientras generas yield real. Estrategia probada en mercados alcistas y bajistas.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 hover:border-crypto-gold/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i data-lucide="landmark" class="w-6 h-6 text-purple-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">DeFi Avanzado</h3>
+                    <p class="text-gray-400 text-sm">Lending, liquidity pools y estrategias en Uniswap sin morir en el intento. Gestión de riesgo profesional.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 hover:border-crypto-gold/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4">
+                        <i data-lucide="search" class="w-6 h-6 text-orange-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">On-Chain Analysis</h3>
+                    <p class="text-gray-400 text-sm">Lee la blockchain como los institucionales. Métricas que realmente importan. Detecta movimientos de ballenas.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 hover:border-crypto-gold/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-crypto-gold/20 flex items-center justify-center mb-4">
+                        <i data-lucide="cpu" class="w-6 h-6 text-crypto-gold"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Automatización</h3>
+                    <p class="text-gray-400 text-sm">Herramientas para que tu dinero trabaje mientras duermes. Bots y alertas personalizadas.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 glass-card rounded-2xl p-8 border-l-4 border-crypto-gold">
+                <div class="flex items-start gap-4">
+                    <i data-lucide="calendar" class="w-8 h-8 text-crypto-gold flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2">Cronograma: 14-15 de Marzo al 12-13 de Abril</h3>
+                        <p class="text-gray-400 mb-4">Todos los sábados y domingos. Horario PST (ajustamos para otros husos).</p>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-crypto-success"></i> Semana 1: Fundamentos y Seguridad Extrema</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-crypto-success"></i> Semana 2: Bitcoin y el RPB System</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-crypto-success"></i> Semana 3: DeFi y Yield Real</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-crypto-success"></i> Semana 4: Análisis y Detección de Riesgos</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-crypto-success"></i> Semana 5: Construcción de Sistemas y Escalabilidad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="py-24 bg-crypto-navy/30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Resultados Reales de Gente Real
+                </h2>
+                <p class="text-xl text-gray-400">
+                    No promesas. No capturas de pantalla editadas. Solo testimonios verificables de quienes ya aplicaron el sistema.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/D2wx4_DEOwM" title="Testimonio 1" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-sm font-bold">JD</div>
+                            <div>
+                                <p class="font-semibold text-sm">Juan David</p>
+                                <p class="text-xs text-gray-500">Miami, FL</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400">"De perder dinero en estafas a generar yield mensual con el RPB System. La diferencia es abismal."</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/BFjNBBz8kn8" title="Testimonio 2" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-sm font-bold">MR</div>
+                            <div>
+                                <p class="font-semibold text-sm">María R.</p>
+                                <p class="text-xs text-gray-500">Houston, TX</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400">"Nunca pensé que entendería DeFi. Ahora manejo mis propias estrategias sin depender de nadie."</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/t3bmfSZHOtc" title="Testimonio 3" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-sm font-bold">CV</div>
+                            <div>
+                                <p class="font-semibold text-sm">Carlos V.</p>
+                                <p class="text-xs text-gray-500">Los Ángeles, CA</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400">"La comunidad de Skool vale más que el curso. Alertas de estafas en tiempo real me salvaron miles."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authority Section -->
+    <section id="autoridad" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-crypto-gold/5 to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Lo que los que mandan en el dinero ya entendieron
+                </h2>
+                <p class="text-xl text-gray-400">
+                    Mientras la mayoría ignora la revolución, los gigantes financieros están construyendo sobre ella.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="quote-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                        <i data-lucide="building-2" class="w-8 h-8 text-yellow-400"></i>
+                    </div>
+                    <blockquote class="text-lg italic text-gray-300 mb-4">
+                        "En el futuro, muchas transacciones no serán entre humanos, sino entre máquinas. Y blockchain será la infraestructura."
+                    </blockquote>
+                    <cite class="text-crypto-gold font-bold not-italic">— CZ, Fundador de Binance</cite>
+                </div>
+
+                <div class="quote-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <i data-lucide="landmark" class="w-8 h-8 text-blue-400"></i>
+                    </div>
+                    <blockquote class="text-lg italic text-gray-300 mb-4">
+                        "La tecnología blockchain es real y transformará el sistema financiero."
+                    </blockquote>
+                    <cite class="text-crypto-gold font-bold not-italic">— Jamie Dimon, CEO JP Morgan</cite>
+                </div>
+
+                <div class="quote-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-black border border-white/20 flex items-center justify-center">
+                        <i data-lucide="bar-chart-3" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <blockquote class="text-lg italic text-gray-300 mb-4">
+                        "La tokenización de activos es la próxima generación de los mercados."
+                    </blockquote>
+                    <cite class="text-crypto-gold font-bold not-italic">— Larry Fink, CEO BlackRock</cite>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 md:p-12 border border-red-500/30 bg-red-500/5">
+                <div class="max-w-3xl mx-auto text-center">
+                    <i data-lucide="alert-circle" class="w-12 h-12 text-red-400 mx-auto mb-6"></i>
+                    <h3 class="font-display text-2xl md:text-3xl font-bold mb-6 text-white">
+                        La brecha entre quienes dominan este lenguaje y quienes se quedan afuera no se cerrará. Se expandirá.
+                    </h3>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Los bancos ya lo entendieron. BlackRock ya lo entendió. Las máquinas ya están transando entre ellas. Mientras tanto, nuestra comunidad sigue siendo el blanco favorito de las estafas porque nadie nos enseñó el lenguaje. <span class="text-crypto-gold font-bold">Eso termina aquí.</span>
+                    </p>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        En 2030 habrá dos tipos de personas: las que ven hacia atrás arrepentidas, y las que están sentadas en la mesa donde se escriben las reglas. Esta formación es tu entrada a esa segunda mesa.
+                    </p>
+                    <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-red-500/20 border border-red-500/50 text-red-300 font-bold">
+                        <i data-lucide="clock" class="w-5 h-5"></i>
+                        <span>Pero las sillas son limitadas. Y la puerta no se queda abierta.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precios" class="py-24 bg-crypto-navy/30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Elige tu nivel de entrada
+                </h2>
+                <p class="text-xl text-gray-400">
+                    Desde la formación esencial hasta la mentoría personalizada de alto nivel.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Curso Group -->
+                <div class="glass-card rounded-3xl p-8 border border-white/10 hover:border-crypto-gold/50 transition-all">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-crypto-gold/20 flex items-center justify-center">
+                            <i data-lucide="users" class="w-6 h-6 text-crypto-gold"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold">Formación en Grupo</h3>
+                            <p class="text-gray-400 text-sm">5 semanas en vivo + Skool</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-success"></i>
+                            <span class="text-gray-300">20 horas de clases en vivo</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-success"></i>
+                            <span class="text-gray-300">Acceso de por vida a grabaciones</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-success"></i>
+                            <span class="text-gray-300">Comunidad Skool privada</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-success"></i>
+                            <span class="text-gray-300">RPB System completo</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-success"></i>
+                            <span class="text-gray-300">Certificado de finalización</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-400">Pago único</span>
+                                <span class="text-2xl font-bold text-crypto-gold">$499 USDT</span>
+                            </div>
+                            <p class="text-xs text-gray-500">Mejor opción de valor</p>
+                        </div>
+                        
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-400">2 pagos</span>
+                                <span class="text-2xl font-bold text-white">$600 USDT</span>
+                            </div>
+                            <p class="text-xs text-gray-500">2 x $300 - Flexibilidad de pago</p>
+                        </div>
+                    </div>
+
+                    <a href="pago.html" class="w-full mt-6 bg-crypto-gold hover:bg-amber-500 text-black font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                        <span>Inscribirme Ahora</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                </div>
+
+                <!-- Asesoría 1 a 1 -->
+                <div class="pricing-card-featured rounded-3xl p-8 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-crypto-purple text-white font-bold px-6 py-2 rounded-full text-sm">
+                        Alto Nivel
+                    </div>
+
+                    <div class="flex items-center gap-3 mb-6 mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-crypto-purple/20 flex items-center justify-center">
+                            <i data-lucide="crown" class="w-6 h-6 text-crypto-purple"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold">Asesoría 1 a 1</h3>
+                            <p class="text-gray-400 text-sm">Mentoría personalizada VIP</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-purple flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-300"><strong>20 horas</strong> de asesoría personalizada con Andrés</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-purple flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-300"><strong>Creación de portafolio</strong> crypto personalizado</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-purple flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-300"><strong>Generación de ingresos pasivos</strong> diseñada para tu perfil</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-purple flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-300"><strong>Implementación RPB System</strong> completa y optimizada</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-purple flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-300"><strong>Tarjeta No KYC</strong> para gastos fuera del sistema tradicional</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-purple flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-300"><strong>Wallet Trezor Model T</strong> + configuración completa</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-crypto-purple flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-300">Acceso de por vida a la formación en grupo</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-crypto-purple/20 border border-crypto-purple/50 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300">Inversión total</span>
+                            <span class="text-3xl font-bold text-white">$2,500 USDT</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Incluye hardware wallet Trezor T ($200+ valor)</p>
+                    </div>
+
+                    <a href="pago-asesoria.html" class="w-full bg-crypto-purple hover:bg-purple-600 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25">
+                        <span>Aplicar a la Asesoría</span>
+                        <i data-lucide="crown" class="w-5 h-5"></i>
+                    </a>
+
+                    <p class="text-center text-xs text-gray-500 mt-4">Solo 5 cupos disponibles por mes</p>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-gray-400 mb-4">¿Prefieres pagar en otra crypto? Aceptamos BTC, ETH, SOL</p>
+                <div class="flex justify-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                        <i data-lucide="bitcoin" class="w-5 h-5 text-orange-400"></i>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                        <i data-lucide="diamond" class="w-5 h-5 text-purple-400"></i>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                        <span class="text-green-400 font-bold text-xs">SOL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-crypto-gold/10 to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-display text-4xl md:text-6xl font-bold mb-6">
+                La mesa está puesta.<br>
+                <span class="gradient-text">¿Vas a sentarte?</span>
+            </h2>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                Cada día que esperas es un día donde otros están acumulando conocimiento que tú no tienes. La próxima década no espera a nadie.
+            </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="pago.html" class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full text-lg">Inscribirme $499</a>
-                <a href="pago-asesoria.html" class="border border-purple-500 hover:bg-purple-500/20 text-white px-8 py-4 rounded-full text-lg">Asesoría VIP $2,500</a>
+                <a href="pago.html" class="bg-crypto-gold hover:bg-amber-500 text-black font-bold px-12 py-5 rounded-full text-xl transition-all transform hover:scale-105 shadow-2xl shadow-crypto-gold/25 inline-flex items-center justify-center gap-3">
+                    <span>Quiero la Formación</span>
+                    <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                </a>
+                <a href="pago-asesoria.html" class="border-2 border-crypto-purple hover:bg-crypto-purple/20 text-white px-12 py-5 rounded-full text-xl transition-all inline-flex items-center justify-center gap-3">
+                    <span>Quiero la Asesoría VIP</span>
+                    <i data-lucide="crown" class="w-6 h-6 text-crypto-purple"></i>
+                </a>
             </div>
+            <p class="mt-8 text-gray-500 text-sm">Pago 100% en crypto • Acceso inmediato a Skool tras confirmación</p>
         </div>
     </section>
 
-    <section id="testimonios" class="py-20 bg-gray-900/30">
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12 bg-crypto-dark">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Testimonios Reales</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass-card rounded-2xl overflow-hidden">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/D2wx4_DEOwM" allowfullscreen></iframe>
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="logo-a w-10 h-10 text-xl">A</div>
+                        <span class="font-display font-bold text-lg">Andrés Crypto</span>
                     </div>
-                    <div class="p-4">
-                        <p class="font-semibold">Juan David - Miami</p>
-                        <p class="text-sm text-gray-400">"De perder en estafas a generar yield mensual"</p>
-                    </div>
-                </div>
-                <div class="glass-card rounded-2xl overflow-hidden">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/BFjNBBz8kn8" allowfullscreen></iframe>
-                    </div>
-                    <div class="p-4">
-                        <p class="font-semibold">María R. - Houston</p>
-                        <p class="text-sm text-gray-400">"Ahora manejo mis estrategias sin depender de nadie"</p>
-                    </div>
-                </div>
-                <div class="glass-card rounded-2xl overflow-hidden">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/t3bmfSZHOtc" allowfullscreen></iframe>
-                    </div>
-                    <div class="p-4">
-                        <p class="font-semibold">Carlos V. - Los Ángeles</p>
-                        <p class="text-sm text-gray-400">"Alertas de estafas me salvaron miles"</p>
+                    <p class="text-sm text-gray-500 mb-4">
+                        Educación práctica en blockchain para la comunidad hispana en USA. Consultoría profesional con experiencia en Cypher Capital (EAU).
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="https://www.instagram.com/andrescrypto.eth/" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-pink-600/20 border border-transparent hover:border-pink-500/50 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5 text-gray-400 hover:text-pink-400"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-cyan-600/20 border border-transparent hover:border-cyan-500/50 transition-all">
+                            <svg class="w-5 h-5 text-gray-400 hover:text-cyan-400" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                            </svg>
+                        </a>
+                        <a href="https://x.com/Andrescryptoeth" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gray-600/20 border border-transparent hover:border-gray-500/50 transition-all">
+                            <svg class="w-5 h-5 text-gray-400 hover:text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="precios" class="py-20">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <h2 class="text-4xl font-bold text-center mb-12">Elige tu nivel</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass-card rounded-3xl p-8">
-                    <h3 class="text-2xl font-bold mb-4">Formación en Grupo</h3>
-                    <ul class="space-y-3 mb-6 text-gray-300">
-                        <li>✓ 20 horas en vivo (5 semanas)</li>
-                        <li>✓ Acceso de por vida a grabaciones</li>
-                        <li>✓ Comunidad Skool privada</li>
-                        <li>✓ RPB System completo</li>
+                <div>
+                    <h4 class="font-bold mb-4">Programas</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#programa" class="hover:text-crypto-gold transition-colors">Formación en Grupo</a></li>
+                        <li><a href="#precios" class="hover:text-crypto-gold transition-colors">Asesoría 1 a 1</a></li>
+                        <li><a href="#" class="hover:text-crypto-gold transition-colors">Skool Privado</a></li>
                     </ul>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
-                            <span>Pago único</span>
-                            <span class="text-2xl font-bold text-amber-500">$499 USDT</span>
-                        </div>
-                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
-                            <span>2 pagos</span>
-                            <span class="text-xl font-bold">$600 USDT</span>
-                        </div>
-                    </div>
-                    <a href="pago.html" class="block w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 rounded-xl text-center">Inscribirme</a>
                 </div>
-
-                <div class="glass-card rounded-3xl p-8 border-2 border-purple-500 bg-purple-500/10">
-                    <div class="inline-block bg-purple-500 text-white text-sm font-bold px-3 py-1 rounded-full mb-4">VIP</div>
-                    <h3 class="text-2xl font-bold mb-4">Asesoría 1 a 1</h3>
-                    <ul class="space-y-3 mb-6 text-gray-300">
-                        <li>✓ 20 horas personalizadas con Andrés</li>
-                        <li>✓ Trezor Model T incluido</li>
-                        <li>✓ Tarjeta No KYC para gastos</li>
-                        <li>✓ Portafolio crypto personalizado</li>
-                        <li>✓ Todo lo del curso en grupo</li>
+                <div>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-crypto-gold transition-colors">Términos de Servicio</a></li>
+                        <li><a href="#" class="hover:text-crypto-gold transition-colors">Política de Privacidad</a></li>
+                        <li><span class="text-xs">Solo educación, no asesoría financiera</span></li>
                     </ul>
-                    <div class="text-center mb-6">
-                        <span class="text-4xl font-bold text-purple-400">$2,500 USDT</span>
-                    </div>
-                    <a href="pago-asesoria.html" class="block w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 rounded-xl text-center">Aplicar</a>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                            <a href="https://wa.me/573104252940" class="hover:text-crypto-gold transition-colors">+57 310 425 2940</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            <span>Servicio para toda USA</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <footer class="border-t border-white/10 py-12 bg-black">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-3">
-                    <i data-lucide="shield-check" class="w-6 h-6 text-amber-500"></i>
-                    <span class="font-bold text-lg">Andrés Crypto Academy</span>
-                </div>
-                <div class="flex items-center gap-4">
-                    <a href="https://www.instagram.com/andrescrypto.eth/" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
-                        <i data-lucide="instagram" class="w-5 h-5 text-gray-400"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
-                        <span class="text-sm">TT</span>
-                    </a>
-                    <a href="https://x.com/Andrescryptoeth" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
-                        <span class="text-sm">X</span>
-                    </a>
-                </div>
-                <a href="https://wa.me/573104252940" class="text-gray-400 hover:text-amber-500">+57 310 425 2940</a>
+            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-600">
+                <p>© 2025 Andrés Crypto Academy. Este programa es únicamente educativo.</p>
             </div>
-            <p class="text-center text-gray-600 text-sm mt-8">© 2025 Andrés Crypto Academy. Solo educación, no asesoría financiera.</p>
         </div>
     </footer>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
