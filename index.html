@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrés Crypto Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #0a0a0f; color: #ffffff; }
+        .glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .gradient-text { background: linear-gradient(135deg, #f59e0b 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .social-icon { transition: all 0.3s ease; }
+        .social-icon:hover { transform: translateY(-3px); filter: brightness(1.2); }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <nav class="fixed w-full z-50 top-0 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-blue-500 flex items-center justify-center">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl">Andrés Crypto</h1>
+                    <p class="text-xs text-gray-400">Academy</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#programa" class="text-gray-300 hover:text-amber-500 text-sm">Programa</a>
+                <a href="#testimonios" class="text-gray-300 hover:text-amber-500 text-sm">Testimonios</a>
+                <a href="#precios" class="text-gray-300 hover:text-amber-500 text-sm">Precios</a>
+                <div class="flex items-center gap-2">
+                    <a href="https://www.instagram.com/andrescrypto.eth/" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                        <i data-lucide="instagram" class="w-4 h-4 text-gray-300"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                        <span class="text-xs">TT</span>
+                    </a>
+                    <a href="https://x.com/Andrescryptoeth" target="_blank" class="social-icon w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                        <span class="text-xs">X</span>
+                    </a>
+                </div>
+                <a href="#precios" class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-6 py-2 rounded-full text-sm">Empezar</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20 px-6">
+        <div class="container mx-auto text-center max-w-4xl">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-amber-500 mb-6">
+                <span class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
+                <span>Inicio: 14-15 de Marzo 2025</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">Domina el <span class="gradient-text">Lenguaje</span> del Dinero Digital</h1>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">Formación intensiva de 5 semanas en vivo para hispanos en USA. Evita estafas, construye activos reales con el RPB System.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="pago.html" class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full text-lg">Inscribirme $499</a>
+                <a href="pago-asesoria.html" class="border border-purple-500 hover:bg-purple-500/20 text-white px-8 py-4 rounded-full text-lg">Asesoría VIP $2,500</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios" class="py-20 bg-gray-900/30">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Testimonios Reales</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/D2wx4_DEOwM" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-semibold">Juan David - Miami</p>
+                        <p class="text-sm text-gray-400">"De perder en estafas a generar yield mensual"</p>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/BFjNBBz8kn8" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-semibold">María R. - Houston</p>
+                        <p class="text-sm text-gray-400">"Ahora manejo mis estrategias sin depender de nadie"</p>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/t3bmfSZHOtc" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-semibold">Carlos V. - Los Ángeles</p>
+                        <p class="text-sm text-gray-400">"Alertas de estafas me salvaron miles"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="precios" class="py-20">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="text-4xl font-bold text-center mb-12">Elige tu nivel</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card rounded-3xl p-8">
+                    <h3 class="text-2xl font-bold mb-4">Formación en Grupo</h3>
+                    <ul class="space-y-3 mb-6 text-gray-300">
+                        <li>✓ 20 horas en vivo (5 semanas)</li>
+                        <li>✓ Acceso de por vida a grabaciones</li>
+                        <li>✓ Comunidad Skool privada</li>
+                        <li>✓ RPB System completo</li>
+                    </ul>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+                            <span>Pago único</span>
+                            <span class="text-2xl font-bold text-amber-500">$499 USDT</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+                            <span>2 pagos</span>
+                            <span class="text-xl font-bold">$600 USDT</span>
+                        </div>
+                    </div>
+                    <a href="pago.html" class="block w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 rounded-xl text-center">Inscribirme</a>
+                </div>
+
+                <div class="glass-card rounded-3xl p-8 border-2 border-purple-500 bg-purple-500/10">
+                    <div class="inline-block bg-purple-500 text-white text-sm font-bold px-3 py-1 rounded-full mb-4">VIP</div>
+                    <h3 class="text-2xl font-bold mb-4">Asesoría 1 a 1</h3>
+                    <ul class="space-y-3 mb-6 text-gray-300">
+                        <li>✓ 20 horas personalizadas con Andrés</li>
+                        <li>✓ Trezor Model T incluido</li>
+                        <li>✓ Tarjeta No KYC para gastos</li>
+                        <li>✓ Portafolio crypto personalizado</li>
+                        <li>✓ Todo lo del curso en grupo</li>
+                    </ul>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-purple-400">$2,500 USDT</span>
+                    </div>
+                    <a href="pago-asesoria.html" class="block w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 rounded-xl text-center">Aplicar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-12 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-amber-500"></i>
+                    <span class="font-bold text-lg">Andrés Crypto Academy</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/andrescrypto.eth/" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                        <i data-lucide="instagram" class="w-5 h-5 text-gray-400"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@andrescrypto.eth" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                        <span class="text-sm">TT</span>
+                    </a>
+                    <a href="https://x.com/Andrescryptoeth" target="_blank" class="social-icon w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                        <span class="text-sm">X</span>
+                    </a>
+                </div>
+                <a href="https://wa.me/573104252940" class="text-gray-400 hover:text-amber-500">+57 310 425 2940</a>
+            </div>
+            <p class="text-center text-gray-600 text-sm mt-8">© 2025 Andrés Crypto Academy. Solo educación, no asesoría financiera.</p>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

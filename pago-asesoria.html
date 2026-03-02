@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagar Asesoria VIP | Andres Crypto Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #0a0a0f; color: #ffffff; }
+        .glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .crypto-option { transition: all 0.3s ease; }
+        .crypto-option.selected { border-color: #8b5cf6; background: rgba(139,92,246,0.1); }
+        .network-option { transition: all 0.2s ease; }
+        .network-option.selected { background: #8b5cf6; color: #fff; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl">
+        <div class="glass-card rounded-3xl p-8 border border-purple-500/30 bg-purple-500/5">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-purple-500/20 flex items-center justify-center">
+                    <i data-lucide="crown" class="w-8 h-8 text-purple-500"></i>
+                </div>
+                <h1 class="text-3xl font-bold mb-2">Asesoria 1 a 1 VIP</h1>
+                <p class="text-gray-400">Mentoria personalizada de alto nivel</p>
+            </div>
+
+            <div class="space-y-3 mb-8 p-4 rounded-xl bg-white/5">
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-purple-500"></i><span class="text-sm">20 horas personalizadas con Andres</span></div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-purple-500"></i><span class="text-sm">Trezor Model T incluido</span></div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-purple-500"></i><span class="text-sm">Tarjeta No KYC para gastos</span></div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-purple-500"></i><span class="text-sm">Portafolio crypto personalizado</span></div>
+            </div>
+
+            <h3 class="font-bold mb-4">1. Selecciona la moneda</h3>
+            <div class="grid grid-cols-4 gap-3 mb-6">
+                <button onclick="selectCrypto('USDT')" class="crypto-option selected p-4 rounded-xl border border-white/10 flex flex-col items-center gap-2" id="crypto-USDT"><span class="text-2xl">USDT</span></button>
+                <button onclick="selectCrypto('USDC')" class="crypto-option p-4 rounded-xl border border-white/10 flex flex-col items-center gap-2" id="crypto-USDC"><span class="text-2xl">USDC</span></button>
+                <button onclick="selectCrypto('BTC')" class="crypto-option p-4 rounded-xl border border-white/10 flex flex-col items-center gap-2" id="crypto-BTC"><span class="text-2xl">BTC</span></button>
+                <button onclick="selectCrypto('ETH')" class="crypto-option p-4 rounded-xl border border-white/10 flex flex-col items-center gap-2" id="crypto-ETH"><span class="text-2xl">ETH</span></button>
+            </div>
+            <button onclick="selectCrypto('SOL')" class="crypto-option w-full p-4 rounded-xl border border-white/10 flex items-center justify-center gap-2 mb-6" id="crypto-SOL"><span class="text-2xl">SOL</span></button>
+
+            <div id="network-section" class="mb-6">
+                <h3 class="font-bold mb-4">2. Selecciona la red</h3>
+                <div class="flex gap-3">
+                    <button onclick="selectNetwork('TRC20')" class="network-option selected px-4 py-2 rounded-full border border-white/20 text-sm font-medium" id="net-TRC20">TRC20</button>
+                    <button onclick="selectNetwork('BEP20')" class="network-option px-4 py-2 rounded-full border border-white/20 text-sm font-medium" id="net-BEP20">BEP20</button>
+                    <button onclick="selectNetwork('SOL')" class="network-option px-4 py-2 rounded-full border border-white/20 text-sm font-medium" id="net-SOL">Solana</button>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-xl p-6 border border-purple-500/30 bg-purple-500/5 mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm text-gray-400">Envia el pago a:</span>
+                    <button onclick="copyAddress()" class="text-purple-500 hover:text-purple-400 flex items-center gap-1 text-sm"><i data-lucide="copy" class="w-4 h-4"></i><span>Copiar</span></button>
+                </div>
+                <code id="wallet-address" class="block w-full p-3 rounded-lg bg-black/50 text-purple-500 font-mono text-sm break-all">TPTFbWUXoQ1qtHDeHWp8atVPv7zE4d1Dwt</code>
+                <div id="network-tag" class="mt-2 inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-500 text-xs font-bold">TRC20</div>
+            </div>
+
+            <div class="text-center mb-6 p-4 rounded-xl bg-white/5 border border-purple-500/30">
+                <p class="text-gray-400 text-sm mb-1">Inversion total</p>
+                <p id="amount-display" class="text-4xl font-bold text-purple-500">$2,500 USDT</p>
+                <p class="text-xs text-gray-500 mt-1">Incluye Trezor Model T</p>
+            </div>
+
+            <a href="https://wa.me/573104252940?text=Hola%20Andres,%20acabo%20de%20realizar%20el%20pago%20para%20la%20ASESORIA%20VIP.%20Adjunto%20screenshot%20del%20txid." 
+               class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>Ya pague → Notificar por WhatsApp</span>
+            </a>
+        </div>
+
+        <div class="text-center mt-6">
+            <a href="index.html" class="text-gray-400 hover:text-white flex items-center justify-center gap-2">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Volver al inicio</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        const wallets = {
+            'USDT': { 'TRC20': 'TPTFbWUXoQ1qtHDeHWp8atVPv7zE4d1Dwt', 'BEP20': '0x196366b7140825c0a03121fe6152171a98d9944d', 'SOL': '6UBAwj8TPFjk9fZXu1DrGY52sakMgN9uGQztciLopp8G' },
+            'USDC': { 'TRC20': 'TPTFbWUXoQ1qtHDeHWp8atVPv7zE4d1Dwt', 'BEP20': '0x196366b7140825c0a03121fe6152171a98d9944d', 'SOL': '6UBAwj8TPFjk9fZXu1DrGY52sakMgN9uGQztciLopp8G' },
+            'BTC': '3MWrP5wpWuPDXUhAp4t2ihD6A7EvkDXWQq',
+            'ETH': '0x196366b7140825c0a03121fe6152171a98d9944d',
+            'SOL': '6UBAwj8TPFjk9fZXu1DrGY52sakMgN9uGQztciLopp8G'
+        };
+        let currentCrypto = 'USDT', currentNetwork = 'TRC20';
+        function selectCrypto(crypto) {
+            currentCrypto = crypto;
+            document.querySelectorAll('.crypto-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('crypto-' + crypto).classList.add('selected');
+            document.getElementById('network-section').style.display = (crypto === 'USDT' || crypto === 'USDC') ? 'block' : 'none';
+            updateWallet();
+            updateAmount();
+        }
+        function selectNetwork(network) {
+            currentNetwork = network;
+            document.querySelectorAll('.network-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('net-' + network).classList.add('selected');
+            updateWallet();
+        }
+        function updateWallet() {
+            let address;
+            if (currentCrypto === 'USDT' || currentCrypto === 'USDC') {
+                address = wallets[currentCrypto][currentNetwork];
+                document.getElementById('network-tag').textContent = currentNetwork;
+                document.getElementById('network-tag').style.display = 'inline-block';
+            } else {
+                address = wallets[currentCrypto];
+                document.getElementById('network-tag').style.display = 'none';
+            }
+            document.getElementById('wallet-address').textContent = address;
+        }
+        function updateAmount() {
+            document.getElementById('amount-display').textContent = '$2,500 ' + currentCrypto;
+        }
+        function copyAddress() {
+            navigator.clipboard.writeText(document.getElementById('wallet-address').textContent).then(() => alert('Direccion copiada'));
+        }
+        updateWallet();
+    </script>
+</body>
+</html>
